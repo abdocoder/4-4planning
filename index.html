@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4/4 planning</title>
+    <link rel="stylesheet" href="path-to-your-style.css"> <!-- Add the path to your existing stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link rel="stylesheet" href="path-to-sidebar-styles.css"> <!-- Add the path to your sidebar styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+          
+            justify-content: center ;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        #content {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+         
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input:hover {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        button {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5aa8db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .work {
+            background-color: #FF0000; /* لون أحمر لفترة العمل */
+        }
+
+        .break {
+            background-color: #00FF00; /* لون أخضر لفترة الراحة */
+        }
+
+        #resultMessage {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Add your existing styles for the sidebar menu here */
+        .sidebar {
+            position: fixed;
+            width: 240px;
+            left: -240px;
+            height: 100%;
+            background: #1e1e1e;
+            transition: all .5s ease;
+        }
+
+        .sidebar header {
+            font-size: 28px;
+            color: white;
+            line-height: 70px;
+            text-align: center;
+            background: #1b1b1b;
+            user-select: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar a {
+            display: block;
+            height: 65px;
+            width: 100%;
+            color: white;
+            line-height: 65px;
+            padding-left: 30px;
+            box-sizing: border-box;
+            border-bottom: 1px solid black;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            border-left: 5px solid transparent;
+            font-family: 'Open Sans', sans-serif;
+            transition: all .5s ease;
+        }
+
+        a.active, a:hover {
+            border-left: 5px solid #b93632;
+            color: #b93632;
+        }
+
+        .sidebar a i {
+            font-size: 23px;
+            margin-right: 16px;
+        }
+
+        .sidebar a span {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        #check {
+            display: none;
+        }
+
+        label #btn, label #cancel {
+            position: absolute;
+            cursor: pointer;
+            color: white;
+            border-radius: 5px;
+            border: 1px solid #262626;
+            margin: 15px 30px;
+            font-size: 29px;
+            background: #262626;
+            height: 45px;
+            width: 45px;
+            text-align: center;
+            line-height: 45px;
+            transition: all .5s ease;
+        }
+
+        label #cancel {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #check:checked ~ .sidebar {
+            left: 0;
+        }
+
+        #check:checked ~ label #btn {
+            margin-left: 245px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #check:checked ~ label #cancel {
+            margin-left: 245px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media(max-width: 860px) {
+            .sidebar {
+                height: auto;
+                width: 70px;
+                left: 0;
+                margin: 100px 0;
+            }
+
+            header, #btn, #cancel {
+                display: none;
+            }
+
+            span {
+                position: absolute;
+                margin-left: 23px;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .sidebar a {
+                height: 60px;
+            }
+
+            .sidebar a i {
+                margin-left: -10px;
+            }
+
+            a:hover {
+                width: 200px;
+                background: inherit;
+            }
+
+            .sidebar a:hover span {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <header>4/4 planning</header>
+        <a href="#" class="active">
+            <i class="fas fa-qrcode"></i>
+            <span>ادخل يوم دخولك</span>
+        </a>
+   
+        <a href="#">
+            <i class="fas fa-stream"></i>
+            <span>Overview</span>
+        </a>
+     
+        <a href="#">
+            <i class="far fa-question-circle"></i>
+            <span>About</span>
+        </a>
+      
+        <a href="#">
+            <i class="far fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <div id="content">
+        <label for="startDate">ادخل يوم دخولك :</label>
+        <input type="date" id="startDate">
+
+        <button onclick="generateSchedule()">ابدا</button>
+
+        <table id="resultTable">
+            <!-- Les résultats seront affichés ici -->
+        </table>
+
+        <div id="resultMessage">هذا هو أيام العمل والراحة بالنسبة لك.</div>
+    </div>
+
+    <script>
+        function generateSchedule() {
+            const startDateInput = document.getElementById("startDate");
+            const startDate = new Date(startDateInput.value);
+            const resultTable = document.getElementById("resultTable");
+            const resultMessage = document.getElementById("resultMessage");
+
+            resultTable.innerHTML = "<tr><th>Durée</th><th>Début</th><th>Fin</th><th>Statut</th></tr>";
+
+            for (let i = 0; i < 26; i++) {
+                const workStartDate = new Date(startDate);
+                workStartDate.setDate(startDate.getDate() + i * 28);
+
+                const workEndDate = new Date(workStartDate);
+                workEndDate.setDate(workStartDate.getDate() + 28);
+
+                const row = resultTable.insertRow(-1);
+                const cellCycle = row.insertCell(0);
+                const cellWorkStart = row.insertCell(1);
+                const cellWorkEnd = row.insertCell(2);
+                const cellStatus = row.insertCell(3);
+
+                cellCycle.textContent = i + 1;
+                cellWorkStart.textContent = formatDate(workStartDate);
+                cellWorkEnd.textContent = formatDate(workEndDate);
+
+                if (i % 2 === 0) {
+                    cellStatus.textContent = "عمل";
+                    cellStatus.className = "work";
+                } else {
+                    cellStatus.textContent = "راحة";
+                    cellStatus.className = "break";
+                }
+            }
+
+            resultTable.style.display = "table";
+            resultMessage.style.display = "block";
+            resultMessage.textContent = " أيام العمل والراحة بالنسبة لك";
+        }
+
+        function formatDate(date) {
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('fr-FR', options);
+        }
+    </script>
+</body>
+</html>
