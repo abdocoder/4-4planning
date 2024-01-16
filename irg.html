@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IRG Calculator</title>
+    <title>IAG Calculator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,9 +71,9 @@
 </head>
 <body>
     <div id="calculator-container">
-        <h1>IRG Calculator</h1>
+        <h1>IAG Calculator</h1>
 
-        <label for="irgDecembre">IRG décembre:</label>
+        <label for="irgDecembre">IAG décembre:</label>
         <input type="number" id="irgDecembre" />
 
         <label for="salaireDecembre">Salaire de base décembre:</label>
@@ -89,7 +89,7 @@
             <option value="3">Option 3 (>30)</option>
         </select>
 
-        <button onclick="calculate()">Calculate nv IRG</button>
+        <button onclick="calculate()">Calculate nv IAG</button>
 
         <div id="result"></div>
     </div>
@@ -115,7 +115,7 @@
 
         function displayResult(result) {
             const resultElement = document.getElementById('result');
-            resultElement.innerHTML = `IRG NV <span style="color: black; font-weight: bold;">${result} da</span>`;
+            resultElement.innerHTML = `IAG NV <span style="color: black; font-weight: bold;">${result} da</span>`;
         }
     </script>
 </body>
