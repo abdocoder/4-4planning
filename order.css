@@ -148,6 +148,9 @@ form .form-row{
 }
 .about p{
 text-align: justify;
+justify-content: center;
+font-family: Arial, sans-serif;
+align-items: center; 
 margin: 5px;
 padding: 5px;
 font-family: Arial, sans-serif;
