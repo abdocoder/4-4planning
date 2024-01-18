@@ -7,7 +7,6 @@
   font-family: 'Poppins', sans-serif;
 }
 body{
-  display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
@@ -125,6 +124,8 @@ form .form-row{
   margin: 30px;
   text-align: center;
   justify-content: center;
+  font-family: Arial, sans-serif;
+  align-items: center;
 }
 .about h1{
   margin: 10px;
@@ -148,7 +149,8 @@ form .form-row{
 .about p{
 text-align: justify;
 margin: 5px;
-  padding: 5px;
+padding: 5px;
+font-family: Arial, sans-serif;
 }
 @media (max-width: 700px) {
   .container .text{
