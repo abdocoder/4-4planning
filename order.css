@@ -8,6 +8,7 @@
 }
 body{
   align-items: center;
+  text-aline:center;
   justify-content: center;
   min-height: 100vh;
   padding: 40px;
@@ -169,5 +170,17 @@ font-family: Arial, sans-serif;
   }
   .submit-btn .input-data{
     width: 40%!important;
+  }
+  .canvalogo{
+    text-align: center;
+    height: 200px;
+    margin-top: 20px;
+    top: 20px;
+    width: 90%;
+  
+  }
+  .canvalogo img{
+    width: auto;
+    height: 200px;
   }
 }
