@@ -119,21 +119,10 @@ form .form-row{
   border-radius: 15px 40px;
   
 }
-.canvalogo{
-  text-align: center;
-  height: 300px;
-  margin-bottom: 200px;
-  width: 100%;
-
-}
-.canvalogo img{
-  width: auto;
-  height: 300px;
-}
 .about{
   box-sizing: border-box;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
   margin: 30px;
   text-align: center;
 }
@@ -177,17 +166,5 @@ margin: 5px;
   }
   .submit-btn .input-data{
     width: 40%!important;
-  }
-  .canvalogo{
-    text-align: center;
-    height: 200px;
-    margin-top: 20px;
-    top: 20px;
-    width: 90%;
-  
-  }
-  .canvalogo img{
-    width: auto;
-    height: 200px;
   }
 }
