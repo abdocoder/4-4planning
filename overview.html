@@ -1,34 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>overview</title>
     <link rel="shortcut icon" href="image.png" type="image/x-icon">
-    <link rel="stylesheet" href="order.css">
+    <title>4/4 planning avec reliquat</title>
+    <link rel="stylesheet" href="path-to-your-style.css"> <!-- Add the path to your existing stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="path-to-sidebar-styles.css"> <!-- Add the path to your sidebar styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+        }
+
+        #content {
+            text-align: center;
+        }
+
+        #stah {
+            display: block;
+            margin: 15px;
+            font-weight: 800;
+            outline: none;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #5335cf 0%, #de005e 25%, #f66e48 50%, #de005e 75%, #5335cf 100%);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animate 10s linear infinite;
+        }
+        @keyframes animate {
+            to{
+                background-position: 400%;
+            }
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input:hover {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        button {
+            padding: 11px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #3498db;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #5aa8db;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        .work {
+            background-color: #FF0000; /* لون أحمر لفترة العمل */
+        }
+
+        .break {
+            background-color: #00FF00; /* لون أخضر لفترة الراحة */
+        }
+
+        #resultMessage {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-weight: 800;
+            outline: none;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #5335cf 0%, #de005e 25%, #f66e48 50%, #de005e 75%, #5335cf 100%);
+            background-size: 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: animate 10s linear infinite;
+        }
+        @keyframes animate {
+            to{
+                background-position: 400%;
+            }
+        }
+
+        /* Add your existing styles for the sidebar menu here */
+        .sidebar {
+            position: fixed;
+            width: 240px;
+            left: -240px;
+            height: 100%;
+            background: white;
+            transition: all .5s ease;
+        }
+
+        .sidebar header {
+            font-size: 28px;
+            color: white;
+            line-height: 70px;
+            text-align: center;
+            background: #1b1b1b;
+            user-select: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .sidebar a {
+            display: block;
+            height: 65px;
+            width: 100%;
+            color: black;
+            line-height: 65px;
+            padding-left: 30px;
+            box-sizing: border-box;
+            border-bottom: 1px solid black;
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            border-left: 5px solid transparent;
+            font-family: 'Open Sans', sans-serif;
+            transition: all .5s ease;
+        }
+
+        a.active, a:hover {
+            border-left: 5px solid #b93632;
+            color: #b93632;
+        }
+
+        .sidebar a i {
+            font-size: 23px;
+            margin-right: 16px;
+        }
+
+        .sidebar a span {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        #check {
+            display: none;
+        }
+
+        label #btn, label #cancel {
+            position: absolute;
+            cursor: pointer;
+            color: white;
+            border-radius: 5px;
+            border: 1px solid #262626;
+            margin: 10px 5px;
+            font-size: 29px;
+            background: #262626;
+            height: 45px;
+            width: 45px;
+            text-align: center;
+            line-height: 45px;
+            transition: all .5s ease;
+        }
+
+        label #cancel {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #check:checked ~ .sidebar {
+            left: 0;
+        }
+
+        #check:checked ~ label #btn {
+            margin-left: 245px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #check:checked ~ label #cancel {
+            margin-left: 245px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media(max-width: 30px) {
+            .sidebar {
+                height: auto;
+                width: 70px;
+                left: 0;
+                margin: 100px 0;
+            }
+
+            header, #btn, #cancel {
+                display: none;
+            }
+
+            span {
+                position: absolute;
+                margin-left: 23px;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .sidebar a {
+                height: 60px;
+            }
+
+            .sidebar a i {
+                margin-left: -10px;
+            }
+
+            a:hover {
+                width: 200px;
+                background: inherit;
+            }
+
+            .sidebar a:hover span {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    </style>
 </head>
 <body>
- 
-<div class="about" >
-    <h1>Overview</h1>
-    <div class="service">
-      <img src="image.png" width="250" height="250" alt="">
-      <div class="descp">
-        <p>4/4 planning</p>
-      <p>
-   <p> .....قيد المراجعة ..... </p>
+    <input type="checkbox" id="check">
+    <label for="check">
+        <i class="fas fa-bars" id="btn"></i>
+        <i class="fas fa-times" id="cancel"></i>
+    </label>
+    <div class="sidebar">
+        <header>4/4 planning</header>
+        <a href="index.html" class="active">
+            <i class="fas fa-qrcode"></i>
+            <span>System 4/4</span>
+        </a>
    
-  
-    </div>
+        <a href="overview.html">
+            <i class="fas fa-stream"></i>
+            <span>System 4/4+1</span>
+        </a>
+        <a href="irg.html">
+            <i class="fas fa-fax"></i>
+            <span>IAG calcul</span>
+        </a>
      
-  </div>
-</div>
+        <a href="aboutus.html">
+            <i class="far fa-question-circle"></i>
+            <span>About</span>
+        </a>
+      
+        <a href="contact.html">
+            <i class="far fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </div>
 
+    <div id="content">
+        <label id="stah" for="startDate">ادخل يوم دخولك <br>Saisissez votre date</label>
+        <input type="date" id="startDate">
 
+        <button onclick="calculate()">ابدا</button>
 
-    
+        <table id="resultTable">
+            <!-- Les résultats seront affichés ici -->
+        </table>
+
+        <div id="resultMessage">هذا هو أيام العمل والراحة بالنسبة لك.</div>
+    </div>
+
+<script>
+function addDays(date, days) {
+        var result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
+    }
+
+    // This function formats a date as dd/mm/yyyy
+    function formatDate(date) {
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return day + "/" + month + "/" + year;
+    }
+
+    function generateTableRows(startDate) {
+        // Use fixed values for the number of work days, rest days, and cycles
+        var workDays = 29;
+        var restDays = 28;
+        var cycles = 10;
+        var rows = "";
+        var currentDate = new Date(startDate);
+
+        for (var i = 0; i < cycles; i++) {
+            // Work status line
+            rows += "<tr style='background-color: red;'><td colspan='2'>عمل</td></tr>";
+
+            // Work period
+            var workStart = currentDate;
+            var workEnd = addDays(workStart, workDays);
+            rows += "<tr><td>" + formatDate(workStart) + "</td><td>" + formatDate(workEnd) + "</td></tr>";
+            currentDate = (workEnd);
+
+            // Rest status line
+            rows += "<tr style='background-color: green;'><td colspan='2'>راحة</td></tr>";
+   // Rest period
+                var restStart = currentDate;
+                var restEnd = addDays(restStart, restDays - 1);
+                rows += "<tr><td>" + formatDate(restStart) + "</td><td>" + formatDate(restEnd) + "</td></tr>";
+                currentDate = (restEnd);
+            }
+            return rows;
+        }
+
+        function calculate() {
+            // Get the user input
+            var startDate = document.getElementById("startDate").value;
+
+            // Validate the user input
+            if (startDate == "") {
+                alert("Please enter a valid start date");
+                return;
+            }
+
+            // Generate the table rows
+            var tableRows = generateTableRows(startDate);
+
+            // Insert the table rows into the table body
+            document.getElementById("resultTable").innerHTML = tableRows;
+            document.getElementById("resultMessage").style.display = "block";
+        }
+            
+    </script>
+            
+                
 </body>
 </html>
