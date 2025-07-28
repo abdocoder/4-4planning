@@ -10,6 +10,32 @@
     <link rel="stylesheet" href="path-to-sidebar-styles.css"> <!-- Add the path to your sidebar styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans:600&display=swap">
     <style>
+        <script>
+// Android WebView interface
+function setupWebView() {
+    // Handle external links
+    document.querySelectorAll('a[href^="http"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if(!this.href.includes(window.location.hostname) && 
+               !this.href.endsWith('.html')) {
+                e.preventDefault();
+                if(window.AndroidInterface) {
+                    window.AndroidInterface.openExternal(this.href);
+                } else {
+                    window.open(this.href, '_blank');
+                }
+            }
+        });
+    });
+}
+
+// Initialize when page loads
+if(document.readyState === 'complete') {
+    setupWebView();
+} else {
+    window.addEventListener('load', setupWebView);
+}
+</script>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
